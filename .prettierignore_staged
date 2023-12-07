@@ -15,3 +15,6 @@ pnpm-lock.yaml
 **/convex/_generated/**
 test/lib/amp-validator-wasm.js
 test/production/pages-dir/production/fixture/amp-validator-wasm.js
+
+# TODO: remove this, but it needs https://github.com/prettier/prettier/pull/15718
+packages/next/src/build/templates/app-page.ts
