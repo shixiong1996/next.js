@@ -11,6 +11,7 @@ import type { WEB_VITALS } from '../shared/lib/utils'
 import type { NextParsedUrlQuery } from './request-meta'
 import type { SizeLimit } from '../types'
 import type { SwrDelta } from './lib/revalidate'
+import type { ExperimentalPPRConfig } from './lib/experimental/ppr'
 
 export type NextConfigComplete = Required<NextConfig> & {
   images: Required<ImageConfigComplete>
@@ -371,7 +372,7 @@ export interface ExperimentalConfig {
   /**
    * Using this feature will enable the `react@experimental` for the `app` directory.
    */
-  ppr?: boolean
+  ppr?: ExperimentalPPRConfig
 
   /**
    * Enables experimental taint APIs in React.
@@ -450,9 +451,21 @@ export type ExportPathMap = {
   [path: string]: {
     page: string
     query?: NextParsedUrlQuery
+
+    /**
+     * @internal
+     */
     _isAppDir?: boolean
-    _isAppPrefetch?: boolean
+
+    /**
+     * @internal
+     */
     _isDynamicError?: boolean
+
+    /**
+     * @internal
+     */
+    _supportsPPR?: boolean
   }
 }
 

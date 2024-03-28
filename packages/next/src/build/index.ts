@@ -186,6 +186,7 @@ import { createProgress } from './progress'
 import { traceMemoryUsage } from '../lib/memory/trace'
 import { generateEncryptionKeyBase64 } from '../server/app-render/encryption-utils'
 import type { DeepReadonly } from '../shared/lib/deep-readonly'
+import { isPPREnabled, isPPRSupported } from '../server/lib/experimental/ppr'
 
 interface ExperimentalBypassForInfo {
   experimentalBypassFor?: RouteHas[]
@@ -1732,7 +1733,6 @@ export default async function build(
       const additionalSsgPaths = new Map<string, Array<string>>()
       const additionalSsgPathsEncoded = new Map<string, Array<string>>()
       const appStaticPaths = new Map<string, Array<string>>()
-      const appPrefetchPaths = new Map<string, string>()
       const appStaticPathsEncoded = new Map<string, Array<string>>()
       const appNormalizedPaths = new Map<string, string>()
       const appDynamicParamPaths = new Set<string>()
@@ -1800,7 +1800,7 @@ export default async function build(
           minimalMode: ciEnvironment.hasNextSupport,
           allowedRevalidateHeaderKeys:
             config.experimental.allowedRevalidateHeaderKeys,
-          experimental: { ppr: config.experimental.ppr === true },
+          pprEnabled: isPPREnabled(config.experimental.ppr),
         })
 
         incrementalCacheIpcPort = cacheInitialization.ipcPort
@@ -1878,7 +1878,7 @@ export default async function build(
               locales: config.i18n?.locales,
               defaultLocale: config.i18n?.defaultLocale,
               nextConfigOutput: config.output,
-              ppr: config.experimental.ppr === true,
+              pprConfig: config.experimental.ppr,
             })
         )
 
@@ -1976,7 +1976,7 @@ export default async function build(
                   computedManifestData
                 )
 
-                let isPPR = false
+                let supportsPPR = false
                 let isSSG = false
                 let isStatic = false
                 let isServerComponent = false
@@ -2091,7 +2091,7 @@ export default async function build(
                               : config.experimental.isrFlushToDisk,
                             maxMemoryCacheSize: config.cacheMaxMemorySize,
                             nextConfigOutput: config.output,
-                            ppr: config.experimental.ppr === true,
+                            pprConfig: config.experimental.ppr,
                           })
                         }
                       )
@@ -2110,8 +2110,8 @@ export default async function build(
                           // If this route can be partially pre-rendered, then
                           // mark it as such and mark that it can be
                           // generated server-side.
-                          if (workerResult.isPPR) {
-                            isPPR = workerResult.isPPR
+                          if (workerResult.supportsPPR) {
+                            supportsPPR = workerResult.supportsPPR
                             isSSG = true
                             isStatic = true
 
@@ -2166,7 +2166,6 @@ export default async function build(
                                 ])
                                 isStatic = true
                               } else if (
-                                isDynamic &&
                                 !hasGenerateStaticParams &&
                                 (appConfig.dynamic === 'error' ||
                                   appConfig.dynamic === 'force-static')
@@ -2174,7 +2173,7 @@ export default async function build(
                                 appStaticPaths.set(originalAppPath, [])
                                 appStaticPathsEncoded.set(originalAppPath, [])
                                 isStatic = true
-                                isPPR = false
+                                supportsPPR = false
                               }
                             }
                           }
@@ -2185,18 +2184,6 @@ export default async function build(
                             appDynamicParamPaths.add(originalAppPath)
                           }
                           appDefaultConfigs.set(originalAppPath, appConfig)
-
-                          // Only generate the app prefetch rsc if the route is
-                          // an app page.
-                          if (
-                            !isStatic &&
-                            !isAppRouteRoute(originalAppPath) &&
-                            !isDynamicRoute(originalAppPath) &&
-                            !isPPR &&
-                            !isInterceptionRoute
-                          ) {
-                            appPrefetchPaths.set(originalAppPath, page)
-                          }
                         }
                       } else {
                         if (isEdgeRuntime(pageRuntime)) {
@@ -2320,7 +2307,7 @@ export default async function build(
                   totalSize,
                   isStatic,
                   isSSG,
-                  isPPR,
+                  supportsPPR,
                   isHybridAmp,
                   ssgPageRoutes,
                   initialRevalidateSeconds: false,
@@ -2614,33 +2601,20 @@ export default async function build(
               // revalidate periods and dynamicParams settings
               appStaticPaths.forEach((routes, originalAppPath) => {
                 const encodedRoutes = appStaticPathsEncoded.get(originalAppPath)
-                const appConfig = appDefaultConfigs.get(originalAppPath) || {}
+                const appConfig = appDefaultConfigs.get(originalAppPath)
 
                 routes.forEach((route, routeIdx) => {
                   defaultMap[route] = {
                     page: originalAppPath,
                     query: { __nextSsgPath: encodedRoutes?.[routeIdx] },
-                    _isDynamicError: appConfig.dynamic === 'error',
+                    _isDynamicError: appConfig?.dynamic === 'error',
                     _isAppDir: true,
+                    _supportsPPR: appConfig
+                      ? isPPRSupported(config.experimental.ppr, appConfig)
+                      : undefined,
                   }
                 })
               })
-
-              // Ensure we don't generate explicit app prefetches while in PPR.
-              if (config.experimental.ppr && appPrefetchPaths.size > 0) {
-                throw new Error(
-                  "Invariant: explicit app prefetches shouldn't generated with PPR"
-                )
-              }
-
-              for (const [originalAppPath, page] of appPrefetchPaths) {
-                defaultMap[page] = {
-                  page: originalAppPath,
-                  query: {},
-                  _isAppDir: true,
-                  _isAppPrefetch: true,
-                }
-              }
 
               if (i18n) {
                 for (const page of [
@@ -2673,6 +2647,7 @@ export default async function build(
                   }
                 }
               }
+
               return defaultMap
             },
           }
@@ -2743,8 +2718,9 @@ export default async function build(
 
             // When this is an app page and PPR is enabled, the route supports
             // partial pre-rendering.
-            const experimentalPPR =
-              !isRouteHandler && config.experimental.ppr === true
+            const experimentalPPR: true | undefined =
+              !isRouteHandler &&
+              isPPRSupported(config.experimental.ppr, appConfig)
                 ? true
                 : undefined
 

@@ -318,6 +318,7 @@ createNextDescribe(
 
             if (signal === 'redirect()') {
               const location = res.headers.get('location')
+              expect(location).not.toBeNull()
               expect(typeof location).toEqual('string')
 
               // The URL returned in `Location` is absolute, so we need to parse it
