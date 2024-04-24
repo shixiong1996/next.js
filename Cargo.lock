@@ -321,7 +321,7 @@ dependencies = [
 [[package]]
 name = "auto-hash-map"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "serde",
  "smallvec",
@@ -394,7 +394,7 @@ dependencies = [
  "cc",
  "cfg-if",
  "libc",
- "miniz_oxide 0.7.1",
+ "miniz_oxide",
  "object",
  "rustc-demangle",
 ]
@@ -1144,7 +1144,7 @@ dependencies = [
  "cssparser-macros",
  "dtoa-short",
  "itoa",
- "phf 0.10.1",
+ "phf 0.11.2",
  "serde",
  "smallvec",
 ]
@@ -1584,12 +1584,12 @@ checksum = "0ce7134b9999ecaf8bcd65542e436736ef32ddca1b3e06094cb6ec5755203b80"
 
 [[package]]
 name = "flate2"
-version = "1.0.25"
+version = "1.0.28"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a8a2db397cb1c8772f31494cb8917e48cd1e64f0fa7efac59fbd741a0a8ce841"
+checksum = "46303f565772937ffe1d394a4fac6f411c6013172fadde9dcdb1e147a086940e"
 dependencies = [
  "crc32fast",
- "miniz_oxide 0.6.2",
+ "miniz_oxide",
 ]
 
 [[package]]
@@ -2816,15 +2816,6 @@ checksum = "68354c5c6bd36d73ff3feceb05efa59b6acb7626617f4962be322a825e61f79a"
 
 [[package]]
 name = "miniz_oxide"
-version = "0.6.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b275950c28b37e794e8c55d88aeb5e139d0ce23fdbbeda68f8d7174abdf9e8fa"
-dependencies = [
- "adler",
-]
-
-[[package]]
-name = "miniz_oxide"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e7810e0be55b428ada41041c41f32c9f1a42817901b4ccf45fa3d4b6561e74c7"
@@ -3094,7 +3085,7 @@ dependencies = [
 [[package]]
 name = "node-file-trace"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "serde",
@@ -3564,9 +3555,7 @@ version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fabbf1ead8a5bcbc20f5f8b939ee3f5b0f6f281b6ad3468b84656b658b455259"
 dependencies = [
- "phf_macros 0.10.0",
  "phf_shared 0.10.0",
- "proc-macro-hack",
 ]
 
 [[package]]
@@ -3575,7 +3564,7 @@ version = "0.11.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ade2d8b8f33c7333b51bcf0428d37e217e9f32192ae4772156f65063b8ce03dc"
 dependencies = [
- "phf_macros 0.11.2",
+ "phf_macros",
  "phf_shared 0.11.2",
 ]
 
@@ -3607,20 +3596,6 @@ checksum = "48e4cc64c2ad9ebe670cb8fd69dd50ae301650392e81c05f9bfcb2d5bdbc24b0"
 dependencies = [
  "phf_shared 0.11.2",
  "rand",
-]
-
-[[package]]
-name = "phf_macros"
-version = "0.10.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58fdf3184dd560f160dd73922bea2d5cd6e8f064bf4b13110abd81b03697b4e0"
-dependencies = [
- "phf_generator 0.10.0",
- "phf_shared 0.10.0",
- "proc-macro-hack",
- "proc-macro2",
- "quote",
- "syn 1.0.109",
 ]
 
 [[package]]
@@ -3713,7 +3688,7 @@ dependencies = [
  "crc32fast",
  "fdeflate",
  "flate2",
- "miniz_oxide 0.7.1",
+ "miniz_oxide",
 ]
 
 [[package]]
@@ -3816,12 +3791,6 @@ dependencies = [
  "quote",
  "version_check",
 ]
-
-[[package]]
-name = "proc-macro-hack"
-version = "0.5.20+deprecated"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dc375e1527247fe1a97d8b7156678dfe7c1af2fc075c9a4db3690ecd2a148068"
 
 [[package]]
 name = "proc-macro2"
@@ -6943,7 +6912,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -6974,7 +6943,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-build"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "cargo-lock",
@@ -6986,7 +6955,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-bytes"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "bytes",
@@ -7000,7 +6969,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-env"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "dotenvs",
@@ -7014,7 +6983,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-fetch"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "lazy_static",
@@ -7030,7 +6999,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-fs"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "auto-hash-map",
@@ -7062,7 +7031,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-hash"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "base16",
  "hex",
@@ -7074,7 +7043,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-macros"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "proc-macro-error",
@@ -7087,7 +7056,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-macros-shared"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -7097,7 +7066,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-malloc"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "mimalloc",
 ]
@@ -7105,7 +7074,7 @@ dependencies = [
 [[package]]
 name = "turbo-tasks-memory"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "auto-hash-map",
@@ -7130,7 +7099,7 @@ dependencies = [
 [[package]]
 name = "turbopack"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -7160,7 +7129,7 @@ dependencies = [
 [[package]]
 name = "turbopack-binding"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "auto-hash-map",
  "mdxjs",
@@ -7200,7 +7169,7 @@ dependencies = [
 [[package]]
 name = "turbopack-browser"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7223,7 +7192,7 @@ dependencies = [
 [[package]]
 name = "turbopack-cli-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "clap",
@@ -7240,7 +7209,7 @@ dependencies = [
 [[package]]
 name = "turbopack-core"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-recursion",
@@ -7269,7 +7238,7 @@ dependencies = [
 [[package]]
 name = "turbopack-css"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7296,7 +7265,7 @@ dependencies = [
 [[package]]
 name = "turbopack-dev-server"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-compression",
@@ -7332,7 +7301,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -7367,7 +7336,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-hmr-protocol"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "serde",
  "serde_json",
@@ -7378,7 +7347,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-plugins"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -7402,7 +7371,7 @@ dependencies = [
 [[package]]
 name = "turbopack-ecmascript-runtime"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indoc",
@@ -7418,7 +7387,7 @@ dependencies = [
 [[package]]
 name = "turbopack-env"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7434,7 +7403,7 @@ dependencies = [
 [[package]]
 name = "turbopack-image"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "base64 0.21.4",
@@ -7453,7 +7422,7 @@ dependencies = [
 [[package]]
 name = "turbopack-json"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "serde",
@@ -7468,7 +7437,7 @@ dependencies = [
 [[package]]
 name = "turbopack-mdx"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "mdxjs",
@@ -7483,7 +7452,7 @@ dependencies = [
 [[package]]
 name = "turbopack-node"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -7517,7 +7486,7 @@ dependencies = [
 [[package]]
 name = "turbopack-nodejs"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7537,7 +7506,7 @@ dependencies = [
 [[package]]
 name = "turbopack-resolve"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
@@ -7555,7 +7524,7 @@ dependencies = [
 [[package]]
 name = "turbopack-static"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "serde",
@@ -7571,7 +7540,7 @@ dependencies = [
 [[package]]
 name = "turbopack-swc-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "swc_core",
  "turbo-tasks",
@@ -7582,7 +7551,7 @@ dependencies = [
 [[package]]
 name = "turbopack-trace-utils"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "crossbeam-channel",
@@ -7598,7 +7567,7 @@ dependencies = [
 [[package]]
 name = "turbopack-wasm"
 version = "0.1.0"
-source = "git+https://github.com/vercel/turbo.git?tag=turbopack-240423.1#5c3b511e921c59cbcf5b9937b9747ac7276ccb12"
+source = "git+https://github.com/vercel/turbo.git?branch=sokra/rename-source-map-prefix#ad7b094bbcfbe22cb4ff5f2784ad66e640e04183"
 dependencies = [
  "anyhow",
  "indexmap 1.9.3",
