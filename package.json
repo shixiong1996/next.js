@@ -196,10 +196,10 @@
     "pretty-bytes": "5.3.0",
     "pretty-ms": "7.0.0",
     "random-seed": "0.3.0",
-    "react": "18.2.0",
+    "react": "19.0.0-canary-cb151849e1-20240424",
     "react-17": "npm:react@17.0.2",
     "react-builtin": "npm:react@19.0.0-canary-cb151849e1-20240424",
-    "react-dom": "18.2.0",
+    "react-dom": "19.0.0-canary-cb151849e1-20240424",
     "react-dom-17": "npm:react-dom@17.0.2",
     "react-dom-builtin": "npm:react-dom@19.0.0-canary-cb151849e1-20240424",
     "react-dom-experimental-builtin": "npm:react-dom@0.0.0-experimental-cb151849e1-20240424",
@@ -252,7 +252,8 @@
     "@babel/types": "7.22.5",
     "@babel/traverse": "7.22.5",
     "@types/react": "18.2.74",
-    "@types/react-dom": "18.2.23"
+    "@types/react-dom": "18.2.23",
+    "react-is": "19.0.0-canary-cb151849e1-20240424"
   },
   "engines": {
     "node": ">=18.17.0",
