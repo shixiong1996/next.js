@@ -138,7 +138,7 @@ import type { DeepReadonly } from '../shared/lib/deep-readonly'
 import { isNodeNextRequest, isNodeNextResponse } from './base-http/helpers'
 import { patchSetHeaderWithCookieSupport } from './lib/patch-set-header'
 import { getBuiltinWaitUntil } from './after/wait-until-builtin'
-import { createNodeWaitUntil } from './after/wait-until-node'
+import { createStandaloneWaitUntil } from './after/wait-until-node'
 
 export type FindComponentsResult = {
   components: LoadComponentsReturnType
@@ -1649,10 +1649,16 @@ export default abstract class Server<
     let waitUntil = useBuiltinWaitUntil ? getBuiltinWaitUntil() : undefined
 
     if (!waitUntil) {
-      // TODO(after): this is a bit ugly
-      const standaloneWaitUntil = createNodeWaitUntil()
-      res.onClose(() => standaloneWaitUntil.finish())
-      waitUntil = standaloneWaitUntil.waitUntil
+      const standaloneWaitUntil = createStandaloneWaitUntil()
+      let closeListenerAdded = false
+      waitUntil = (promise) => {
+        // only add onClose when actually needed, because it's expensive for WebNextResponse
+        if (!closeListenerAdded) {
+          res.onClose(() => standaloneWaitUntil.finish())
+          closeListenerAdded = true
+        }
+        return standaloneWaitUntil.waitUntil(promise)
+      }
     }
 
     return waitUntil
