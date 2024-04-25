@@ -1,3 +1,6 @@
+const fs = require('fs/promises')
+const path = require('path')
+
 const clientGlobs = [
   {
     name: 'Client Bundles (main, webpack)',
@@ -31,6 +34,36 @@ const clientGlobs = [
       '.next/server/pages/edge-ssr.js',
       '.next/server/app/app-edge-ssr/page.js',
     ],
+    getRequiredFiles: async (nextAppDir, fileName) => {
+      if (fileName.startsWith('.next/server/app')) {
+        const manifestJson = await fs.readFile(
+          path.join(nextAppDir, '.next/server/middleware-manifest.json')
+        )
+        const manifest = JSON.parse(manifestJson)
+        console.log({ manifest })
+        const manifestFileEntry = path.relative(
+          path.join(nextAppDir, '.next'),
+          path.join(nextAppDir, fileName)
+        )
+        console.log({ manifestFileEntry })
+
+        const manifestEntry = Object.values(manifest).find((entry) => {
+          return entry.files.includes(manifestFileEntry)
+        })
+
+        if (manifestEntry === undefined) {
+          throw new Error(
+            `${manifestFileEntry} is not listed in any manifest files`
+          )
+        }
+
+        return manifestEntry.files.map((file) => {
+          return path.join('.next', file)
+        })
+      } else {
+        return [fileName]
+      }
+    },
   },
   {
     name: 'Middleware size',
